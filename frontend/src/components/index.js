@@ -1,5 +1,5 @@
 import Navbar from "./navbar/Navbar";
-import Header from "./Header/Header";
+import Header from "./header/Header";
 import FoodDisplay from "./fooddisplay/FoodDisplay";
 import FoodItem from "./fooditems/FoodItem";
 import ExploreMenu from "./explore-menu/ExploreMenu";
