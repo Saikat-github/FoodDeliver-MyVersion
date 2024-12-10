@@ -5,7 +5,7 @@ const initialState = {
     cartItems: {},
     showSignUp: false,
     totalAmt: 0,
-    url: "http://localhost:4000",
+    url: "https://fooddeliver-myversion-backend.onrender.com",
     token: "",
     foodList: []
 }
