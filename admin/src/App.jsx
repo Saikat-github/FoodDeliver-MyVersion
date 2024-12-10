@@ -10,7 +10,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import Edit from './pages/edit/Edit'
 
 const App = () => {
-    const url = 'http://localhost:4000'
+    const url = 'https://fooddeliver-myversion-backend.onrender.com'
 
   return (
     <div className='font-Outfit'>
