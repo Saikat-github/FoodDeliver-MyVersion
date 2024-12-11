@@ -53,9 +53,9 @@ const Orders = ({ url }) => {
               <p className='order-item-food font-semibold'>
                 {order.items.map((item, idx) => {
                   if (idx === order.items.length - 1) {
-                    return item.name + "x" + item.quantity;
+                    return item.name + " x " + item.quantity;
                   } else {
-                    return item.name + "x" + item.quantity + ","
+                    return item.name + " x " + item.quantity + ","
                   }
                 })}
               </p>
