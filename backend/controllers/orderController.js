@@ -7,7 +7,7 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 //placing user oder for frontend
 const placeOrder = async (req, res) => {
-    const url = "http://localhost:5173"
+    const url = "https://fooddeliver-myversion-frontend.onrender.com/"
     try {
         const newOrder = new orderModel({
             userId: req.body.userId,
