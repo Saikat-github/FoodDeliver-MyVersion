@@ -42,7 +42,7 @@ const Navbar = () => {
           <Link to="/cart"><img src={assets.basket_icon} alt="" className='h-6 sm:h-8 cursor-pointer' /></Link>
           <div className={totalAmt > 0 ? "relative w-2 h-2 bg-red-500 rounded-full top-[-34px] right-[-10px]" : "hidden"}></div>
         </div>
-        {!token ? <button onClick={() => dispatch(setShowLogin())} className='bg-transparent text-red-600 text-sm md:text-lg  border-2 border-red-600 py-1 px-4 sm:px-6 rounded-full cursor-pointer hover:bg-red-600 hover:text-white transition-all'>Sign in</button>
+        {!token ? <button onClick={() => dispatch(setShowLogin())} className='bg-transparent text-red-600 text-sm md:text-lg  border-2 border-red-600 py-1 px-4 sm:px-6 rounded-full cursor-pointer hover:bg-red-600 hover:text-white transition-all'>Login</button>
           : <div className='navbar-profile relative group'>
             <img src={assets.profile_icon} alt="" />
             <ul className="nav-profile-dropdown hidden absolute right-0 z-10 group-hover:flex flex-col gap-2 py-3 px-6 rounded-md border border-red-700 bg-white">

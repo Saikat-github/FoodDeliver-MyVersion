@@ -1,8 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify';
+
 
 const PlaceOrder = () => {
   const [error, setError] = useState(null);
@@ -16,10 +18,13 @@ const PlaceOrder = () => {
   const cartItems = useSelector((state) => state.cartItems);
   const url = useSelector((state) => state.url);
 
+  const dispatch = useDispatch();
+
   const { register, handleSubmit, reset } = useForm();
   const navigate = useNavigate();
   useEffect(() => {
     if (!token) {
+      toast.warn("Please login to place order");
       navigate("/")
     } else if (totalAmt === 0) {
       navigate("/cart");

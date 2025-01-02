@@ -9,6 +9,9 @@ import { setCartItems, setFoodList, setToken } from './features/cartSlice'
 import axios from 'axios'
 import Verify from './pages/verify/Verify'
 import MyOrders from './pages/myorders/MyOrders'
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify';
+
 
 function App() {
   const showSignUp = useSelector((state) => state.showSignUp)
@@ -78,6 +81,7 @@ function App() {
         {error ? <div className='text-center my-32 text-2xl border-4 border-red-600 mx-10 sm:mx-48 py-4 font-semibold text-red-600 rounded-lg'>{error}!</div> : <div>
           {showSignUp ? <Login /> : <></>}
           <Navbar />
+          <ToastContainer />
           <div className='mx-[10%] font-Outfit'>
             <ScrollToTop />
             <Routes>
