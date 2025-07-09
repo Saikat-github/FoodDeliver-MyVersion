@@ -26,11 +26,9 @@ const MyOrders = () => {
     setError(null);
     try {
       const res = await axios.post(url + "/api/order/userorders", {}, { headers: { token } })
-      console.log(res.data.data);
       setData(res.data.data);
     } catch (error) {
       setError("Some error occurred, Please try again");
-      console.log(error)
     } finally {
       setLoading(false);
     }
