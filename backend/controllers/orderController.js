@@ -7,7 +7,7 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 //placing user oder for frontend
 const placeOrder = async (req, res) => {
-    const url = "https://fooddeliver-myversion-frontend.onrender.com"
+    const url = process.env.FRONTEND_URL
     try {
         const newOrder = new orderModel({
             userId: req.body.userId,
@@ -84,7 +84,7 @@ const verifyOrder = async (req, res) => {
 //user orders for frontend
 const userOrders = async (req, res) => {
     try {
-        const orders = await orderModel.find({userId: req.body.userId});
+        const orders = await orderModel.find({userId: req.body.userId}).sort({ data: -1 });
         res.json({success:true, data: orders})
     } catch (error) {
         console.log(error);
@@ -97,14 +97,14 @@ const userOrders = async (req, res) => {
 //listing orders for admin panel
 const listOrders = async (req, res) => {
     try {
-        const orders = await orderModel.find({});
-        res.json({success: true, data:orders})
+        const orders = await orderModel.find({}).sort({ data: -1 }); // or use createdAt if that's the field
+        res.json({ success: true, data: orders });
     } catch (error) {
         console.log(error);
-        res.json({success:false, message: "Error Occurred"})
-        throw error;
+        res.json({ success: false, message: "Error Occurred" });
     }
 }
+
 
 
 //api for updating order status
