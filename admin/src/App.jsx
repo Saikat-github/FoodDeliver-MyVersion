@@ -10,7 +10,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import Edit from './pages/edit/Edit'
 
 const App = () => {
-    const url = 'https://fooddeliver-myversion-backend.onrender.com'
+    const url = import.meta.env.VITE_BACKEND_URL
 
   return (
     <div className='font-Outfit'>
@@ -18,7 +18,6 @@ const App = () => {
       <Navbar />
       <hr />
       <div className='flex'>
-        <Sidebar />
         <Routes>
           <Route path="/add" element={<Add url={url}/>} />
           <Route path="/" element={<List url={url}/>} />

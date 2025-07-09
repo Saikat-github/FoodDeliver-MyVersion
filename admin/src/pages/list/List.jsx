@@ -3,22 +3,30 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import { assets } from '../../assets/assets';
 import {useNavigate} from 'react-router-dom';
+import {Loader2} from "lucide-react"
+
 
 
 const List = ({ url }) => {
   const [list, setList] = useState([]);
+  const [loader, setLoader] = useState(false);
+
   const navigate = useNavigate()
 
   const fetchList = async () => {
     try {
+      setLoader(true);
       const respone = await axios.get(`${url}/api/food/list`);
       if (respone.data.success) {
         setList(respone.data.data);
       }
     } catch (error) {
       toast.error(error.message);
+    } finally {
+      setLoader(false)
     }
   }
+
 
   useEffect(() => {
     fetchList();
@@ -37,8 +45,16 @@ const List = ({ url }) => {
 
   }, [])
 
+
+    if (loader) {
+    return <div className='flex justify-center w-full my-20'>
+            <Loader2 className='w-6 animate-spin mx-auto'/>
+    </div>
+  }
+
+
   return (
-    <div className='list add flex flex-col sm:pl-10 py-6 w-3/4 md:2/3'>
+    <div className='list add flex flex-col justify-center w-screen m-2 md:my-6'>
       <h2 className='text-center text-2xl font-bold bg-gray-600 text-white mx-auto w-60 py-2 rounded-md mb-6'>List of All Foods</h2>
       <div className="list-table">
         <div className="list-table-format title grid sm:grid-cols-6 grid-cols-4 items-center gap-2 px-4 py-3 border text-sm w-full">

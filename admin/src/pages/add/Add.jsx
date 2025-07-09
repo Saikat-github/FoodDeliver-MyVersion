@@ -53,9 +53,9 @@ const Add = ({ url }) => {
 
 
   return (
-    <div className='add w-[70%] ml-6 md:ml-14 mt-12 text-sm'>
+    <div className='text-sm flex flex-col justify-center w-screen m-2 sm:my-6'>
       <h2 className='text-center text-2xl font-bold bg-gray-600 text-white mx-auto w-60 py-2 rounded-md mb-6'>Add Food Items</h2>
-      <form className='flex flex-col gap-6' onSubmit={handleSubmit(onSubmitHandler)}>
+      <form className='flex flex-col gap-6 justify-center p-4' onSubmit={handleSubmit(onSubmitHandler)}>
         <div className="add-img-upload">
           <p>Upload Image<span className='text-red-600'>*</span></p>
           <label htmlFor="image">
