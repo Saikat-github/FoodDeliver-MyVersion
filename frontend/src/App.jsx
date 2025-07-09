@@ -59,7 +59,6 @@ function App() {
       try {
         await fetchFoodList();
         const storedToken = localStorage.getItem('token');
-        console.log(storedToken)
         if (storedToken && storedToken !== token) {
           dispatch(setToken(storedToken));
           await fetchCartList(storedToken)
