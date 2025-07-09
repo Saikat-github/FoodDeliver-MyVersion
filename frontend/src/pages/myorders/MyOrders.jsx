@@ -10,11 +10,23 @@ const MyOrders = () => {
   const url = useSelector((state) => state.url);
   const token = useSelector((state) => state.token);
 
+
+  const options = {
+  timeZone: 'Asia/Kolkata',
+  day: '2-digit',
+  month: 'long',
+  year: 'numeric',
+  hour: '2-digit',
+  minute: '2-digit',
+  hour12: true,
+};
+
   const fetchOrders = async () => {
     setLoading(true);
     setError(null);
     try {
       const res = await axios.post(url + "/api/order/userorders", {}, { headers: { token } })
+      console.log(res.data.data);
       setData(res.data.data);
     } catch (error) {
       setError("Some error occurred, Please try again");
@@ -43,8 +55,11 @@ const MyOrders = () => {
         <div className='my-4'>
           {data.map((order, idx) => {
             return (
-              <div key={idx} className='grid grid-cols-3 md:grid-cols-6 border-2 items-center'>
-                <img src={assets.parcel_icon} className='w-16' />
+              <div key={idx} className='grid grid-cols-3 md:grid-cols-6 border-2 items-center max-sm:text-sm gap-2 p-1'>
+                <div>
+                  <img src={assets.parcel_icon} className='w-12' />
+                  <p className='text-xs md:w-1/2'>{new Date(order.data).toLocaleString('en-IN', options)}</p>
+                </div>
                 <p className='pr-4 text-sm my-2'>{order.items.map((item, idx) => {
                   if (idx === order.items.length - 1) {
                     return item.name + " x " + item.quantity
@@ -52,10 +67,10 @@ const MyOrders = () => {
                     return item.name + " x " + item.quantity + ", "
                   }
                 })}</p>
-                <p className='text-center text-sm'>₹{order.amount}.00 <br />{order.payment ? "Paid through" : "Not Paid through"} {order.paymentMethod}</p>
+                <p className='text-center text-xs sm:text-sm'>₹{order.amount}.00 <br />{order.payment ? "Paid through" : "Not Paid through"} {order.paymentMethod}</p>
                 <p>Items : {order.items.length}</p>
                 <p><span>&#x25cf;</span> <b>{order.status}</b></p>
-                <button onClick={() => fetchOrders()} className='py-2 px-3 bg-red-300 rounded-sm mx-2 hover:bg-red-400 transition-all duration-300'>Track Order</button>
+                <button onClick={() => fetchOrders()} className='py-2 px-3 bg-red-300 rounded-sm mx-2 hover:bg-red-400 transition-all duration-300 max-sm:text-xs'>Track Order</button>
               </div>
             )
           })}

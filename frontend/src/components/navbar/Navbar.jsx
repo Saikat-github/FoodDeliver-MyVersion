@@ -19,8 +19,9 @@ const Navbar = () => {
     localStorage.removeItem("token");
     dispatch(setToken(""));
     dispatch(setCartItems({}))
-    alert("Logged out successfully");
-    navigate("/")
+    setTimeout(() => {
+      navigate("/")
+    }, 1000);
   }
 
 

@@ -10,7 +10,7 @@ import axios from 'axios'
 import Verify from './pages/verify/Verify'
 import MyOrders from './pages/myorders/MyOrders'
 import 'react-toastify/dist/ReactToastify.css';
-import { ToastContainer } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
 
 
 function App() {
@@ -28,6 +28,8 @@ function App() {
       const response = await axios.get(url + "/api/food/list");
       if (response.data.success) {
         dispatch(setFoodList(response.data.data));
+      } else {
+        toast.error(response.message || "Something went wrong")
       }
     } catch (error) {
       console.log(error);
@@ -40,6 +42,8 @@ function App() {
       const response = await axios.post(url + "/api/cart/get", {}, { headers: { token } });
       if (response.data.success) {
         dispatch(setCartItems(response.data.cartData));
+      } else {
+        toast.error(response.message || "Something went wrong")
       }
     } catch (error) {
       console.log(error);
@@ -55,12 +59,13 @@ function App() {
       try {
         await fetchFoodList();
         const storedToken = localStorage.getItem('token');
+        console.log(storedToken)
         if (storedToken && storedToken !== token) {
           dispatch(setToken(storedToken));
           await fetchCartList(storedToken)
         }
       } catch (error) {
-        setError(error.message);
+        toast.error(error.message);
       } finally {
         setLoading(false);
       }
@@ -78,7 +83,7 @@ function App() {
       </div>
       :
       <div>
-        {error ? <div className='text-center my-32 text-2xl border-4 border-red-600 mx-10 sm:mx-48 py-4 font-semibold text-red-600 rounded-lg'>{error}!</div> : <div>
+        <div>
           {showSignUp ? <Login /> : <></>}
           <Navbar />
           <ToastContainer />
@@ -93,7 +98,7 @@ function App() {
             </Routes>
           </div>
           <Footer />
-        </div>}
+        </div>
       </div>
   )
 }

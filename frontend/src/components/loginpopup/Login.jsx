@@ -11,7 +11,6 @@ import { useNavigate } from 'react-router-dom';
 
 const LoginPopup = () => {
     const [currentState, setCurrentState] = useState("Login");
-    const [error, setError] = useState(null);
     const { register, handleSubmit, formState: { errors, isSubmitting }, reset } = useForm()
     const dispatch = useDispatch()
     const url = useSelector((state) => state.url);
@@ -19,7 +18,6 @@ const LoginPopup = () => {
 
 
     const onSubmitHandler = async (data) => {
-        setError(null);
         try {
             let newUrl = url;
             if (currentState === 'Login') {
@@ -31,14 +29,13 @@ const LoginPopup = () => {
             if (response.data.success) {
                 dispatch(setToken(response.data.token));
                 localStorage.setItem("token", response.data.token);
-                alert("User logged in successfully")
                 dispatch(setShowLogin());
             } else {
-                setError(response.data.message)
+                toast.error(response.data.message)
             }
         } catch (error) {
             console.log(error);
-            setError(error.message);
+            toast.error(error.message);
         } finally {
             reset()
         }
@@ -48,7 +45,6 @@ const LoginPopup = () => {
     return (
         <div className='login-popup absolute z-10 bg-[#00000090] h-screen w-full flex justify-center items-center'>
             <form onSubmit={handleSubmit(onSubmitHandler)} className='login-popup-container place-self-center w-80 text-[#808080] bg-white flex flex-col gap-6 px-8 py-6 rounded animate-[fadeIn_0.5s] text-sm'>
-                {error && <p className='text-red-600 text-center font-semibold text-lg'>{error}!</p>}
                 <div className="login-popup-title flex justify-between items-center text-black">
                     <h2 className='text-2xl font-bold'>{currentState}</h2>
                     <img onClick={() => dispatch(setShowLogin())} src={assets.cross_icon} alt="" className='w-4 cursor-pointer' />
