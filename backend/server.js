@@ -32,6 +32,9 @@ app.use("/images", express.static('uploads'));
 app.use("/api/user", userRouter);
 app.use("/api/cart", cartRouter);
 app.use("/api/order", orderRouter)
+app.get('/ping', (req, res) => {
+  res.status(200).send('pong');
+});
 
 app.get("/", (req, res) => {
     res.send("API working well")
